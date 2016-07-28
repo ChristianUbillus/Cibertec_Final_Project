@@ -1,17 +1,13 @@
 ﻿@model IEnumerable<WebDeveloper.Model.DTO.PersonModelView>
 
-@{
-    ViewBag.Title = "Index";
-    int? selectedId = null;
-}
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Person")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessEntityID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -30,6 +26,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.BusinessEntityID)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
         <td>
@@ -42,26 +41,11 @@
             @Html.DisplayFor(modelItem => item.ModifiedDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {id = item.BusinessEntityID}) |
-            @Html.ActionLink("Details", "Details", new {id = item.BusinessEntityID}) |
-            @Html.ActionLink("Delete", "Delete", new {id = item.BusinessEntityID}) |
-            @Ajax.ActionLink(
-                "View Emails",
-                "EmailList",
-                new {id=item.BusinessEntityID },
-                new AjaxOptions
-                {
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "emailList",
-                    HttpMethod = "GET"
-                }
-            )
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
+
 </table>
-
-<div id="emailList">
-</div>
-
-@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
